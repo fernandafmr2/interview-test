@@ -1,1 +1,4 @@
 CREATE DATABASE IF NOT EXISTS dev;
+CREATE USER 'user'@'%' IDENTIFIED BY 'user';
+GRANT ALL ON dev.* to 'user'@'%';
+FLUSH PRIVILEGES;

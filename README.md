@@ -10,4 +10,5 @@ After that you can access it like the handler available in the server.go file.
 <br/>
 <br/>
 <br/>
+for unit testing it is in the /config folder. This is the main unit test, because if you want to try running with local mysql you don't need to change the actual .env file, just change the env.test.
 Tested on Ubuntu Linux x86_64

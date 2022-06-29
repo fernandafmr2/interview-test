@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	db             *gorm.DB                  = config.SetUpDatabaseConnection()
+	db             *gorm.DB                  = config.SetUpDatabaseConnection(config.New())
 	animeRepository repository.AnimalRepository = repository.NewAnimalRepository(db)
 	animeService    service.AnimalService       = service.NewAnimalService(animeRepository)
 	animalController controller.AnimalController = controller.NewAnimalController(animeService)

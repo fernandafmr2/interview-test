@@ -38,14 +38,12 @@ func (c *animalController) All(context *gin.Context) {
 func (c *animalController) FindByID(context *gin.Context) {
 	id, err := strconv.ParseUint(context.Param("id"), 0, 0)
 	if err != nil {
-		// res := helper.BuildErrorResponse("No param id was found", err.Error(), helper.EmptyObj{})
 		context.AbortWithStatusJSON(http.StatusNotFound ,"404 NOT FOUND")
 		return
 	}
 
 	var animal entity.Animal = c.animalService.FindByID(id)
 	if (animal == entity.Animal{}) {
-		// res := helper.BuildErrorResponse("Data not found", "No data with given id", helper.EmptyObj{})
 		context.JSON(http.StatusNotFound, "404 NOT FOUND")
 	} else {
 		res := helper.BuildResponse(true, "OK", animal)

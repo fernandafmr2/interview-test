@@ -2,25 +2,19 @@ package config
 
 import (
 	"fmt"
-	"os"
 	"interview-test/entity"
 
-	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 // Setup for creating a new connection to database
-func SetUpDatabaseConnection() *gorm.DB {
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		panic("failed to load env file")
-	}
+func SetUpDatabaseConnection(c Config) *gorm.DB {
 
-	dbUser := os.Getenv("DB_USER")
-	dbPass := os.Getenv("DB_PASS")
-	dbHost := os.Getenv("DB_HOST")
-	dbName := os.Getenv("DB_NAME")
+	dbUser := c.Get("DB_USER")
+	dbPass := c.Get("DB_PASS")
+	dbHost := c.Get("DB_HOST")
+	dbName := c.Get("DB_NAME")
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=true&loc=Local", dbUser, dbPass, dbHost, dbName)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
